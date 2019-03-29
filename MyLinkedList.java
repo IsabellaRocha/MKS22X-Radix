@@ -13,7 +13,7 @@ public class MyLinkedList<E>{
   public int size() {
     return size;
   }
-  public boolean add(Integer value) {
+  public boolean add(Object value) {
     if (size == 0) {
       start = new Node(value, null, null);
       end = start;
@@ -62,7 +62,7 @@ public class MyLinkedList<E>{
     }
     return current;
   }
-  public Object set(int idx, Integer value) {
+  public Object set(int idx, Object value) {
     if (idx < 0 || idx >= size) {
       throw new IndexOutOfBoundsException();
     }
@@ -74,7 +74,7 @@ public class MyLinkedList<E>{
     current.setData(value);
     return og;
   }
-  public boolean contains(Integer value) {
+  public boolean contains(Object value) {
     Node current = start;
     while (current != null) {
       if (current.getData() == value) {
@@ -84,7 +84,7 @@ public class MyLinkedList<E>{
     }
     return false;
   }
-  public int indexOf(Integer value) {
+  public int indexOf(Object value) {
     Node current = start;
     for (int idx = 0; idx < size; idx++) {
       if (current.getData().equals(value)) {
@@ -94,7 +94,7 @@ public class MyLinkedList<E>{
     }
     return -1;
   }
-  public void add(int idx, Integer value) {
+  public void add(int idx, Object value) {
     if (idx < 0 || idx > size) {
       throw new IndexOutOfBoundsException();
     }
@@ -150,7 +150,7 @@ public class MyLinkedList<E>{
     size--;
     return og;
   }
-  public boolean remove(Integer value) {
+  public boolean remove(Object value) {
     if (contains(value)) {
       remove(indexOf(value));
       return true;
