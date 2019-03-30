@@ -1,8 +1,8 @@
-public class Node {
-  private Object data;
+public class Node<E> {
+  private E data;
   private Node next,prev;
 
-  public Node(Object data, Node next, Node prev) {
+  public Node(E data, Node next, Node prev) {
     this.data = data;
     this.next = next;
     this.prev = prev;
@@ -12,8 +12,8 @@ public class Node {
   public void setNext(Node next) {
     this.next = next;
   }
-  public Object setData(Object data) {
-    Object og = this.data;
+  public E setData(E data) {
+    E og = this.data;
     this.data = data;
     return og;
   }
@@ -23,7 +23,7 @@ public class Node {
   public Node next() {
     return next;
   }
-  public Object getData() {
+  public E getData() {
     return data;
   }
   public Node prev() {
