@@ -121,16 +121,19 @@ public class MyLinkedList<E>{
       size++;
     }
   }
+  public E removeFront() {
+    E og = start.getData();
+    start = start.next();
+    start.setPrev(null);
+    size--;
+    return og;
+  }
   public E remove(int idx) {
     if (idx < 0 || idx >= size) {
       throw new IndexOutOfBoundsException();
     }
     if (idx == 0) {
-      E og = start.getData();
-      start = start.next();
-      start.setPrev(null);
-      size --;
-      return og;
+      removeFront();
     }
     if (idx == size - 1) {
       E og = end.getData();
