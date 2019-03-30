@@ -9,6 +9,9 @@ public class MyLinkedList<E>{
     this.end = end;
   }
   public MyLinkedList() {
+    size = 0;
+    start = null;
+    end = null;
   }
   public int size() {
     return size;
@@ -54,13 +57,6 @@ public class MyLinkedList<E>{
       current = current.next();
     }
     return current.getData();
-  }
-  private Node<E> getNthNode(int idx) {
-    Node<E> current = start;
-    for (int x = 0; x < idx; x++) {
-      current = current.next();
-    }
-    return current;
   }
   public E set(int idx, E value) {
     if (idx < 0 || idx >= size) {
@@ -178,6 +174,11 @@ public class MyLinkedList<E>{
       output += start + "]";
     }
     return output;
+  }
+  public void clear() {
+    size = 0;
+    start = null;
+    end = null;
   }
   public void extend(MyLinkedList<E> other) {
     if (this.size == 0) {
