@@ -1,9 +1,45 @@
 public class MyLinkedList<E>{
-  private int size;
-  private Node<E> start;
-  private Node<E> end;
+  public class Node {
+    private Object data;
+    private Node next,prev;
 
-  public MyLinkedList(int size, Node<E> start, Node<E> end) {
+    public Node(Object data, Node next, Node prev) {
+      this.data = data;
+      this.next = next;
+      this.prev = prev;
+    }
+    public Node() {
+    }
+    public void setNext(Node next) {
+      this.next = next;
+    }
+    public Object setData(Object data) {
+      Object og = this.data;
+      this.data = data;
+      return og;
+    }
+    public void setPrev(Node prev) {
+      this.prev = prev;
+    }
+    public Node next() {
+      return next;
+    }
+    public Object getData() {
+      return data;
+    }
+    public Node prev() {
+      return prev;
+    }
+    public String toString() {
+      return "" + data;
+    }
+  }
+
+  private int size;
+  private Node start;
+  private Node end;
+
+  public MyLinkedList(int size, Node start, Node end) {
     this.size = size;
     this.start = start;
     this.end = end;
@@ -18,13 +54,13 @@ public class MyLinkedList<E>{
   }
   public boolean add(E value) {
     if (size == 0) {
-      start = new Node<E>(value, null, null);
+      start = new Node(value, null, null);
       end = start;
       size++;
       return true;
     }
     else {
-      Node<E> newEnd = new Node<E>(value, null, end);
+      Node newEnd = new Node(value, null, end);
       end.setNext(newEnd);
       end = newEnd;
       size++;
@@ -33,7 +69,7 @@ public class MyLinkedList<E>{
   }
   public String toString() {
     String output = "[";
-    Node<E> current = start;
+    Node current = start;
     int idx = 0;
     while (current != null && idx < size - 1) {
       output += current + ", ";
@@ -52,26 +88,26 @@ public class MyLinkedList<E>{
     if (idx < 0 || idx >= size) {
       throw new IndexOutOfBoundsException();
     }
-    Node<E> current = start;
+    Node current = start;
     for (int x = 0; x < idx; x++) {
       current = current.next();
     }
-    return current.getData();
+    return (E)current.getData();
   }
   public E set(int idx, E value) {
     if (idx < 0 || idx >= size) {
       throw new IndexOutOfBoundsException();
     }
-    Node<E> current = start;
+    Node current = start;
     for (int x = 0; x < idx; x++) {
       current = current.next();
     }
-    E og = current.getData();
+    E og = (E)current.getData();
     current.setData(value);
     return og;
   }
   public boolean contains(E value) {
-    Node<E> current = start;
+    Node current = start;
     while (current != null) {
       if (current.getData() == value) {
         return true;
@@ -81,7 +117,7 @@ public class MyLinkedList<E>{
     return false;
   }
   public int indexOf(E value) {
-    Node<E> current = start;
+    Node current = start;
     for (int idx = 0; idx < size; idx++) {
       if (current.getData().equals(value)) {
         return idx;
@@ -94,14 +130,14 @@ public class MyLinkedList<E>{
     if (idx < 0 || idx > size) {
       throw new IndexOutOfBoundsException();
     }
-    Node<E> current = start;
+    Node current = start;
     if (idx == 0) {
-      current = new Node<E>(value, start, null);
+      current = new Node(value, start, null);
       start = current;
       size++;
     }
     else if (idx == size) {
-      current = new Node<E>(value, null, end);
+      current = new Node(value, null, end);
       end.setNext(current);
       end = current;
       size++;
@@ -110,7 +146,7 @@ public class MyLinkedList<E>{
       for (int x = 0; x < idx - 1; x++) {
         current = current.next();
       }
-      Node<E> newNode = new Node<E>(value, current.next(), current);
+      Node newNode = new Node(value, current.next(), current);
       current.setNext(newNode);
       current = current.next().next();
       current.setPrev(newNode);
@@ -118,7 +154,7 @@ public class MyLinkedList<E>{
     }
   }
   public E removeFront() {
-    E og = start.getData();
+    E og = (E)start.getData();
     start = start.next();
     start.setPrev(null);
     size--;
@@ -132,21 +168,21 @@ public class MyLinkedList<E>{
       removeFront();
     }
     if (idx == size - 1) {
-      E og = end.getData();
+      E og = (E)end.getData();
       end = end.prev();
       end.setNext(null);
       size --;
       return og;
     }
-    Node<E> current = start;
+    Node current = start;
     for (int x = 0; x < idx - 1; x++) {
       current = current.next();
     }
     current = current.next();
-    E og = current.getData();
+    E og = (E)current.getData();
     current = current.prev();
     current.setNext(current.next().next());
-    Node<E> newCurrent = current.next();
+    Node newCurrent = current.next();
     newCurrent.setPrev(current);
     size--;
     return og;
@@ -160,7 +196,7 @@ public class MyLinkedList<E>{
   }
   public String toStringDebug() { //Prints backwards for testing
     String output = "[";
-    Node<E> current = end;
+    Node current = end;
     int idx = size - 1;
     while (current != null && idx > 0) {
       output += current + ", ";
