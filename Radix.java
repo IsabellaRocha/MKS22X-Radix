@@ -1,6 +1,9 @@
 public class Radix {
   public static void radixsort(int[]data){
     MyLinkedList[] buckets = new MyLinkedList[20];
+    for (int idx = 0; idx < data.length; idx++) {
+      
+    }
   }
   public static int getDigit(int idx, int num) {
     while (num > Math.pow(10, idx)) {

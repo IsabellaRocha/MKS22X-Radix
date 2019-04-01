@@ -84,48 +84,6 @@ public class MyLinkedList<E>{
     }
     return output;
   }
-  public E get(int idx) {
-    if (idx < 0 || idx >= size) {
-      throw new IndexOutOfBoundsException();
-    }
-    Node current = start;
-    for (int x = 0; x < idx; x++) {
-      current = current.next();
-    }
-    return (E)current.getData();
-  }
-  public E set(int idx, E value) {
-    if (idx < 0 || idx >= size) {
-      throw new IndexOutOfBoundsException();
-    }
-    Node current = start;
-    for (int x = 0; x < idx; x++) {
-      current = current.next();
-    }
-    E og = (E)current.getData();
-    current.setData(value);
-    return og;
-  }
-  public boolean contains(E value) {
-    Node current = start;
-    while (current != null) {
-      if (current.getData() == value) {
-        return true;
-      }
-      current = current.next();
-    }
-    return false;
-  }
-  public int indexOf(E value) {
-    Node current = start;
-    for (int idx = 0; idx < size; idx++) {
-      if (current.getData().equals(value)) {
-        return idx;
-      }
-      current = current.next();
-    }
-    return -1;
-  }
   public void add(int idx, E value) {
     if (idx < 0 || idx > size) {
       throw new IndexOutOfBoundsException();
@@ -159,57 +117,6 @@ public class MyLinkedList<E>{
     start.setPrev(null);
     size--;
     return og;
-  }
-  public E remove(int idx) {
-    if (idx < 0 || idx >= size) {
-      throw new IndexOutOfBoundsException();
-    }
-    if (idx == 0) {
-      removeFront();
-    }
-    if (idx == size - 1) {
-      E og = (E)end.getData();
-      end = end.prev();
-      end.setNext(null);
-      size --;
-      return og;
-    }
-    Node current = start;
-    for (int x = 0; x < idx - 1; x++) {
-      current = current.next();
-    }
-    current = current.next();
-    E og = (E)current.getData();
-    current = current.prev();
-    current.setNext(current.next().next());
-    Node newCurrent = current.next();
-    newCurrent.setPrev(current);
-    size--;
-    return og;
-  }
-  public boolean remove(E value) {
-    if (contains(value)) {
-      remove(indexOf(value));
-      return true;
-    }
-    return false;
-  }
-  public String toStringDebug() { //Prints backwards for testing
-    String output = "[";
-    Node current = end;
-    int idx = size - 1;
-    while (current != null && idx > 0) {
-      output += current + ", ";
-      current = current.prev();
-      idx--;
-    }
-    if (start == null) {
-      output +="]";
-    }
-    else {
-      output += start + "]";
-    }
-    return output;
   }
   public void clear() {
     size = 0;
