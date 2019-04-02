@@ -3,6 +3,9 @@ public class Radix {
   public static void radixsort(int[]data){
     MyLinkedList[] buckets = new MyLinkedList[20];
     int max = data[0];
+    for (int idx = 0; idx < buckets.length; idx++) {
+      buckets[idx] = new MyLinkedList();
+    }
     for (int idx = 0; idx < data.length; idx++) {
       if (max < data[idx]) max = data[idx];
     }
