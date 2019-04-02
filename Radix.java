@@ -10,28 +10,25 @@ public class Radix {
     for (int idx = 0; idx < data.length; idx++) {
       if (max < data[idx]) max = data[idx];
     }
-    System.out.println(max);
     int digits = 0;
     while (max > 0) {
       max /= 10;
       digits++;
     }
-    System.out.println(digits);
     MyLinkedList<Integer> temp = new MyLinkedList();
     for (int idx = digits; idx > 0; idx--) {
       for (int x = 0; x < data.length; x++) {
         int digit = getDigit(idx, data[x]);
-        if (data[x] >= 0) {
-          buckets[digit + 10].add(data[x]);
-          temp.extend(buckets[digit + 10]);
-        }
-        if (data[x] < 0) {
-          buckets[9 - Math.abs(digit)].add(data[x]);
-          buckets[9 - Math.abs(digit)].extend(temp);
-        }
+        if (data[x] >= 0) buckets[digit + 10].add(data[x]);
+        if (data[x] < 0) buckets[9 - Math.abs(digit)].add(data[x]);
       }
+      for (int i = 0; i < buckets.length; i++) {
+        temp.extend(buckets[i]);
+      }
+      System.out.println(temp);
+      System.out.println(idx);
       for (int i = 0; i < data.length; i++) {
-        data[i] = (int) temp.removeFront();
+        data[i] = (int)temp.removeFront();
       }
       temp.clear();
       for (int i = 0; i < buckets.length; i++) {
@@ -43,7 +40,7 @@ public class Radix {
       output.extend(buckets[idx]);
     }
     for (int idx = 0; idx < data.length; idx++) {
-      data[idx] = (int) output.removeFront();
+      data[idx] = (int)output.removeFront();
     }
   }
   public static int getDigit(int idx, int num) {

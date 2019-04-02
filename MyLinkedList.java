@@ -112,11 +112,18 @@ public class MyLinkedList<E>{
     }
   }
   public E removeFront() {
-    E og = (E)start.getData();
-    start = start.next();
-    start.setPrev(null);
-    size--;
-    return og;
+    if (size > 1) {
+      E og = (E)start.getData();
+      start = start.next();
+      start.setPrev(null);
+      size--;
+      return og;
+    }
+    else {
+      E og = (E)start.getData();
+      clear();
+      return og;
+    }
   }
   public void clear() {
     size = 0;
