@@ -1,7 +1,7 @@
 import java.util.Arrays;
 public class Radix {
   public static void radixsort(int[]data){
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     MyLinkedList<Integer>[] buckets = new MyLinkedList[20];
     int max = data[0];
     for (int idx = 0; idx < buckets.length; idx++) {
@@ -25,8 +25,6 @@ public class Radix {
       for (int i = 0; i < buckets.length; i++) {
         temp.extend(buckets[i]);
       }
-      System.out.println(temp);
-      System.out.println(idx);
       for (int i = 0; i < data.length; i++) {
         data[i] = (int)temp.removeFront();
       }
@@ -44,10 +42,7 @@ public class Radix {
     }
   }
   public static int getDigit(int idx, int num) {
-    while (num > Math.pow(10, idx)) {
-      num /= 10;
-    }
-    return num % 10;
+    return (int)(num / Math.pow(10, idx)) % 10;
   }
   public static void main(String[] args) {
     System.out.println(getDigit(1, 15));

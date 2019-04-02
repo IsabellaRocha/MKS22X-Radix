@@ -1,9 +1,10 @@
+import java.util.*;
 public class MyLinkedList<E>{
   public class Node {
-    private Object data;
+    private E data;
     private Node next,prev;
 
-    public Node(Object data, Node next, Node prev) {
+    public Node(E data, Node next, Node prev) {
       this.data = data;
       this.next = next;
       this.prev = prev;
@@ -13,8 +14,8 @@ public class MyLinkedList<E>{
     public void setNext(Node next) {
       this.next = next;
     }
-    public Object setData(Object data) {
-      Object og = this.data;
+    public E setData(E data) {
+      E og = this.data;
       this.data = data;
       return og;
     }
@@ -24,7 +25,7 @@ public class MyLinkedList<E>{
     public Node next() {
       return next;
     }
-    public Object getData() {
+    public E getData() {
       return data;
     }
     public Node prev() {
@@ -84,46 +85,17 @@ public class MyLinkedList<E>{
     }
     return output;
   }
-  public void add(int idx, E value) {
-    if (idx < 0 || idx > size) {
-      throw new IndexOutOfBoundsException();
-    }
-    Node current = start;
-    if (idx == 0) {
-      current = new Node(value, start, null);
-      start = current;
-      size++;
-    }
-    else if (idx == size) {
-      current = new Node(value, null, end);
-      end.setNext(current);
-      end = current;
-      size++;
-    }
-    else {
-      for (int x = 0; x < idx - 1; x++) {
-        current = current.next();
-      }
-      Node newNode = new Node(value, current.next(), current);
-      current.setNext(newNode);
-      current = current.next().next();
-      current.setPrev(newNode);
-      size++;
-    }
-  }
   public E removeFront() {
-    if (size > 1) {
-      E og = (E)start.getData();
-      start = start.next();
-      start.setPrev(null);
-      size--;
-      return og;
-    }
-    else {
-      E og = (E)start.getData();
+    if (size == 0) throw new NoSuchElementException();
+    E og = start.getData();
+    if (size == 1) {
       clear();
       return og;
     }
+    start = start.next();
+    start.setPrev(null);
+    size--;
+    return og;
   }
   public void clear() {
     size = 0;
