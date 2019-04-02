@@ -16,7 +16,7 @@ public class Radix {
       digits++;
     }
     MyLinkedList<Integer> store = new MyLinkedList();
-    for (int idx = digits; idx > 0; idx--) {
+    for (int idx = 0; idx < digits; idx++) {
       for (int x = 0; x < data.length; x++) {
         int digit = (data[x] / (int) Math.pow(10, idx)) % 10;
         if (data[x] > 0) buckets[digit + 10].add(data[x]);
